@@ -1,0 +1,971 @@
+/* ---------- Color System ---------- */
+:root {
+    --green-dark: #1f3d2b;
+    --green-main: #2f7d4a;
+    --green-soft: #eaf4ee;
+    --green-muted: #7da892;
+    --green-border: #d6e8dc;
+}
+
+/* ---------- Base ---------- */
+body {
+    font-family: "Inter", "Segoe UI", sans-serif;
+    background-color: #ffffff;
+    color: var(--green-dark);
+    overflow-x: hidden; 
+}
+
+/* ---------- Logo ---------- */
+.logo {
+    width: 44px;
+    height: auto;
+}
+
+/* ---------- Tabs ---------- */
+.nav-tabs {
+    border-bottom: none;
+}
+
+.nav-tabs .nav-link {
+    border: none;
+    color: var(--green-muted);
+    font-weight: 500;
+}
+
+.nav-tabs .nav-link.active {
+    color: var(--green-main);
+    background-color: transparent;
+    border-bottom: 2px solid var(--green-main);
+}
+
+/* ---------- Tab Content ---------- */
+.tab-content {
+    border: none !important;
+}
+
+.tab-content h4 {
+    font-weight: 600;
+}
+
+.tab-content p {
+    color: var(--green-muted);
+    font-size: 0.9rem;
+}
+
+/* ---------- Login Bar ---------- */
+.navbar {
+    background-color: var(--green-dark) !important;
+}
+
+.navbar .nav-link {
+    color: #ffffff !important;
+    font-size: 0.9rem;
+}
+
+/* ---------- Cards (Home) ---------- */
+.card {
+    border: none;
+    border-radius: 14px;
+    background-color: #ffffff;
+    box-shadow: 0 10px 28px rgba(47, 125, 74, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px rgba(47, 125, 74, 0.12);
+}
+
+.card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    padding: 20px;
+}
+
+.card-text {
+    text-align: center;
+    font-weight: 500;
+    color: var(--green-dark);
+}
+
+/* ---------- Main Layout Wrappers ---------- */
+.container-fluid {
+    border-bottom: 1px solid var(--green-border);
+}
+
+/* FIX: Changed centering logic to prevent content squashing */
+.main-cards-wrapper {
+    min-height: calc(100vh - 140px);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers the #main-panel horizontally */
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/* FIX: Force the panel to be full width so grid percentages work */
+#main-panel {
+    width: 100%;
+    max-width: 1200px; /* Prevents it from getting too wide on huge screens */
+    padding: 0 15px;   /* Safety padding */
+}
+
+/* ---------- Achievements UI ---------- */
+
+/* 1. Toggle Button Active State */
+.btn-check:checked + .btn-outline-success {
+    background-color: var(--green-main);
+    color: #fff;
+    border-color: var(--green-main);
+}
+
+/* 2. Achievement Grid - Layout Fixes */
+.ach-item {
+    padding: 0 10px; /* Add slight gutter manually if Bootstrap g-3 fails due to overrides */
+    margin-bottom: 20px;
+}
+
+/* Override Bootstrap columns to ensure consistent 3-column layout */
+/* Important: This works now because #main-panel is forced to 100% width */
+@media (min-width: 992px) {
+    .ach-item {
+        flex: 0 0 auto;
+        width: 33.333333%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .ach-item {
+        flex: 0 0 auto;
+        width: 50%;
+    }
+}
+
+@media (max-width: 767px) {
+    .ach-item {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+}
+
+/* 3. Card - Fixed Size Logic */
+.ach-item .card {
+    height: 140px !important;
+    min-height: 140px !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: row !important; /* Ensure horizontal layout */
+    overflow: hidden;
+}
+
+.ach-item .card-body {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    padding: 1.2rem !important;
+    width: 100%;
+    height: 100%;
+}
+
+/* 4. Icon Circle */
+.ach-item .card-body .rounded-circle {
+    width: 60px !important;
+    height: 60px !important;
+    min-width: 60px !important; /* Prevent shrinking */
+    flex-shrink: 0 !important;
+    margin-right: 15px;
+}
+
+/* 5. Text Content Area */
+.ach-item .card-body > div {
+    flex: 1; /* Allow text area to fill remaining space */
+    min-width: 0; /* Critical for text-overflow to work in flexbox */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* 6. Typography */
+.ach-item .card-title {
+    font-size: 1rem !important;
+    line-height: 1.2 !important;
+    margin-bottom: 0.4rem !important;
+    font-weight: 700 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.ach-item .card-text {
+    font-size: 0.85rem !important;
+    line-height: 1.3 !important;
+    margin-bottom: 0.5rem !important;
+    
+    /* Multi-line truncation logic */
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    white-space: normal !important; /* Allow wrapping */
+}
+
+.ach-item .badge {
+    font-size: 0.7rem !important;
+    padding: 0.35em 0.65em !important;
+    align-self: flex-start; /* Aligns badge to left */
+}
+
+/* 7. Flash Notification (Toast) */
+#flash-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none; /* Allows clicking through the container area */
+}
+
+.ach-toast {
+    background-color: #fff;
+    border-left: 5px solid var(--green-main);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-radius: 4px;
+    padding: 15px 20px;
+    min-width: 300px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transform: translateX(120%);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: auto; /* Re-enable clicks on the toast itself */
+}
+
+.ach-toast.show {
+    transform: translateX(0);
+}
+
+.ach-toast-icon { font-size: 1.8rem; color: #ffc107; }
+.ach-toast-body h6 { margin: 0; color: var(--green-dark); font-weight: 700; }
+.ach-toast-body p { margin: 0; color: var(--green-muted); font-size: 0.85rem; }
+
+
+/* ---------- Level & Titles UI ---------- */
+
+/* Circular Progress Bar */
+.level-progress-wrapper {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: conic-gradient(var(--green-main) 0deg, var(--green-soft) 0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    box-shadow: 0 4px 15px rgba(47, 125, 74, 0.15);
+    transition: background 0.5s ease-out;
+}
+
+.level-progress-inner {
+    width: 130px;
+    height: 130px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.level-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--green-dark);
+    line-height: 1;
+}
+
+.level-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--green-muted);
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.xp-text {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: var(--green-muted);
+    font-weight: 500;
+}
+
+/* Title Cards */
+.title-card {
+    border: 1px solid var(--green-border);
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    background-color: #fff;
+}
+
+.title-card.locked {
+    background-color: #f8f9fa;
+    opacity: 0.7;
+    border-style: dashed;
+}
+
+.title-card.active {
+    border-color: var(--green-main);
+    background-color: var(--green-soft);
+    box-shadow: 0 4px 12px rgba(47, 125, 74, 0.1);
+}
+
+.title-card:hover:not(.locked) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+}
+
+/* XP Badge in Achievements */
+.xp-badge {
+    background-color: #fff8e1;
+    color: #f59e0b;
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    border: 1px solid #ffeeba;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+
+/* ---------- Levels & Titles Updates ---------- */
+
+.level-progress-wrapper {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    /* Default background, will be overridden by inline style for progress */
+    background: #eaf4ee; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    box-shadow: 0 8px 20px rgba(47, 125, 74, 0.15);
+}
+
+.level-progress-inner {
+    width: 140px;
+    height: 140px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.level-number {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--green-main);
+    line-height: 1;
+}
+
+.level-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--green-muted);
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.xp-detail-bar {
+    height: 8px;
+    border-radius: 4px;
+    background-color: #e9ecef;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.xp-detail-fill {
+    height: 100%;
+    background-color: var(--green-main);
+}
+
+/* Title Cards */
+.title-card {
+    border: 1px solid var(--green-border);
+    border-radius: 12px;
+    background-color: #fff;
+    transition: transform 0.2s;
+}
+
+.title-card:hover {
+    transform: translateY(-3px);
+}
+
+.title-card.locked {
+    background-color: #f8f9fa;
+    border-style: dashed;
+    color: #adb5bd;
+}
+
+.title-card.active {
+    border: 2px solid var(--green-main);
+    background-color: var(--green-soft);
+}
+
+.coming-soon-card {
+    border: 2px dashed #ffc107;
+    background-color: #fffbf0;
+    color: #856404;
+    text-align: center;
+    padding: 2rem;
+    border-radius: 12px;
+    opacity: 0.8;
+}
+
+/* ---------- Title Cards Base ---------- */
+.title-card {
+    border: 1px solid var(--green-border);
+    border-radius: 12px;
+    background-color: #fff;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.title-card:hover:not(.locked) {
+    transform: translateY(-5px) scale(1.02);
+    z-index: 2;
+}
+
+/* Locked State (Universal) */
+.title-card.locked {
+    background-color: #f8f9fa;
+    border: 1px dashed #dee2e6;
+    color: #adb5bd;
+    opacity: 0.8;
+}
+.title-card.locked .tier-icon {
+    filter: grayscale(1);
+    opacity: 0.5;
+}
+
+/* Active/Equipped State */
+.title-card.active {
+    border-width: 2px;
+    border-color: var(--green-main);
+    box-shadow: 0 0 15px rgba(47, 125, 74, 0.3);
+}
+
+/* ---------- Title Tiers (Visual Progression) ---------- */
+
+/* Tier 1: Common (Levels 1-19) - Clean, Basic Green */
+.tier-common {
+    background: linear-gradient(135deg, #ffffff 0%, #f0fff4 100%);
+    border-color: #c3e6cb;
+}
+.tier-common .tier-badge { background-color: #e2e6ea; color: #495057; }
+.tier-common .tier-icon { color: #28a745; }
+
+/* Tier 2: Rare (Levels 20-39) - Blue/Teal, "Water/Sky" feel */
+.tier-rare {
+    background: linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);
+    border-color: #90caf9;
+    box-shadow: 0 4px 6px rgba(33, 150, 243, 0.1);
+}
+.tier-rare .card-title { color: #0d47a1; }
+.tier-rare .tier-badge { background-color: #bbdefb; color: #0d47a1; }
+.tier-rare .tier-icon { color: #1976d2; }
+
+/* Tier 3: Epic (Levels 40-69) - Deep Forest, Gold Accents */
+.tier-epic {
+    background: linear-gradient(135deg, #fff3cd 0%, #ffffff 50%, #d4edda 100%);
+    border-color: #ffc107;
+    box-shadow: 0 4px 10px rgba(255, 193, 7, 0.2);
+}
+.tier-epic .card-title { color: #856404; font-weight: 800; }
+.tier-epic .tier-badge { background-color: #ffc107; color: #000; }
+.tier-epic .tier-icon { color: #ffb300; text-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+
+/* Tier 4: Legendary (Levels 70-89) - Purple/Mystical */
+.tier-legendary {
+    background: linear-gradient(135deg, #f3e5f5 0%, #ffffff 100%);
+    border: 1px solid #ce93d8;
+    box-shadow: 0 6px 15px rgba(156, 39, 176, 0.25);
+}
+.tier-legendary .card-title { 
+    background: linear-gradient(45deg, #7b1fa2, #ab47bc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+.tier-legendary .tier-badge { background-color: #e1bee7; color: #4a148c; }
+.tier-legendary .tier-icon { color: #9c27b0; }
+
+/* Tier 5: Mythic (Levels 90+) - Black/Gold/Grand */
+.tier-mythic {
+    background: linear-gradient(135deg, #2c3e50 0%, #000000 100%);
+    border: 2px solid #ffd700;
+    color: #ffd700;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+.tier-mythic .card-title { 
+    color: #ffd700; 
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    letter-spacing: 1px;
+}
+.tier-mythic small { color: #bdc3c7 !important; } /* Override text-muted */
+.tier-mythic .tier-badge { 
+    background: linear-gradient(45deg, #ffd700, #ffecb3); 
+    color: #000; 
+    font-weight: bold;
+    box-shadow: 0 0 5px #ffd700;
+}
+.tier-mythic .tier-icon { color: #ffd700; filter: drop-shadow(0 0 5px rgba(255,215,0,0.8)); }
+.tier-mythic .btn-outline-success { 
+    border-color: #ffd700; 
+    color: #ffd700; 
+}
+.tier-mythic .btn-outline-success:hover { 
+    background-color: #ffd700; 
+    color: #000; 
+}
+
+/* Coming Soon Card Update */
+.coming-soon-card {
+    border: 2px dashed #ffc107;
+    background-color: #fffbf0;
+    color: #856404;
+    text-align: center;
+    padding: 2rem;
+    border-radius: 12px;
+    opacity: 0.8;
+}
+
+/* ------------------------------------------
+   NAVBAR BADGE STYLES (Add this to the bottom)
+   ------------------------------------------
+*/
+
+/* Base Common (Green) */
+.badge-common {
+    background-color: var(--green-main);
+    color: #fff;
+}
+
+/* Rare (Blue/Sky) */
+.badge-rare {
+    background: linear-gradient(135deg, #42a5f5 0%, #1976d2 100%);
+    color: #fff;
+    box-shadow: 0 0 5px rgba(33, 150, 243, 0.5);
+}
+
+/* Epic (Gold/Forest) */
+.badge-epic {
+    background: linear-gradient(135deg, #ffc107 0%, #ff8f00 100%);
+    color: #000;
+    font-weight: 700;
+    box-shadow: 0 0 8px rgba(255, 193, 7, 0.6);
+}
+
+/* Legendary (Purple/Magic) */
+.badge-legendary {
+    background: linear-gradient(135deg, #ab47bc 0%, #7b1fa2 100%);
+    color: #fff;
+    border: 1px solid #e1bee7;
+    box-shadow: 0 0 10px rgba(171, 71, 188, 0.6);
+}
+
+/* Mythic (Black/Gold/Godly) */
+.badge-mythic {
+    background: linear-gradient(135deg, #333 0%, #000 100%);
+    color: #ffd700;
+    border: 1px solid #ffd700;
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.5);
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.7);
+    letter-spacing: 0.5px;
+}
+
+/* ------------------------------------------
+   LEADERBOARD STYLES
+   ------------------------------------------
+*/
+
+.leaderboard-table thead th {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    color: var(--green-muted);
+}
+
+.leaderboard-table tbody tr {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Hover Effect for all rows */
+.leaderboard-table tbody tr:hover {
+    background-color: #f8fff9;
+    transform: scale(1.005);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    z-index: 1;
+    position: relative;
+}
+
+/* Highlight "Me" */
+.rank-me {
+    background-color: #e8f5e9 !important; /* Very light green */
+    border-left: 4px solid var(--green-main);
+}
+
+/* Rank 1: Gold */
+.rank-gold {
+    background: linear-gradient(90deg, #fffbeb 0%, #ffffff 100%);
+    border-left: 4px solid #ffc107;
+}
+.rank-gold td:first-child { /* The trophy icon scaling */
+    transform: scale(1.2); 
+}
+
+/* Rank 2: Silver */
+.rank-silver {
+    background: linear-gradient(90deg, #f8f9fa 0%, #ffffff 100%);
+    border-left: 4px solid #adb5bd;
+}
+
+/* Rank 3: Bronze */
+.rank-bronze {
+    background: linear-gradient(90deg, #fff5eb 0%, #ffffff 100%);
+    border-left: 4px solid #cd7f32;
+}
+
+/* Mobile Adjustments for Table */
+@media (max-width: 576px) {
+    .leaderboard-table {
+        font-size: 0.9rem;
+    }
+    .leaderboard-table .badge {
+        font-size: 0.7rem !important;
+    }
+}
+
+/* ---------- NEW HORIZONTAL ACHIEVEMENT STYLES ---------- */
+
+.ach-list-container {
+    max-width: 1000px;
+    margin: 0 auto; /* Center the list in the panel */
+}
+
+/* The Row Card */
+.ach-row {
+    border: 1px solid #e9ecef;
+    border-radius: 16px; /* Smooth rounded corners */
+    transition: all 0.3s ease;
+    border-left: 6px solid transparent; /* Prepare for colored left border */
+}
+
+.ach-row:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/* EARNED State */
+.ach-row-earned {
+    background-color: #fff;
+    border-left-color: var(--green-main); /* Green bar on left */
+    border-color: #d1e7dd;
+}
+.ach-row-earned .ach-xp-value {
+    color: var(--green-dark);
+}
+
+/* LOCKED State */
+.ach-row-locked {
+    background-color: #f8f9fa;
+    border-left-color: #adb5bd; /* Grey bar on left */
+    opacity: 0.85;
+}
+.ach-row-locked .ach-icon-circle {
+    background-color: #e9ecef !important;
+    filter: grayscale(100%);
+}
+.ach-row-locked .ach-xp-value {
+    color: #adb5bd;
+}
+
+/* Icon Circle */
+.ach-icon-circle {
+    width: 60px;
+    height: 60px;
+    min-width: 60px; /* Prevent shrinking */
+    border-radius: 50%;
+    background-color: #fff;
+    font-size: 1.75rem;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* XP Section (Right Side) */
+.ach-xp-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: #adb5bd;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.ach-xp-value {
+    font-size: 1.8rem;
+    font-weight: 800;
+    line-height: 1;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+/* ---------- Achievements UI ---------- */
+
+/* 1. Toggle Button Active State */
+.btn-check:checked + .btn-outline-success {
+    background-color: var(--green-main);
+    color: #fff;
+    border-color: var(--green-main);
+}
+
+/* 2. Achievement List Container */
+.ach-list-container {
+    width: 100%;
+    max-width: 100%; /* Allow it to fill the whole panel */
+    padding: 0;
+}
+
+/* 3. The Row Item (Wrapper) */
+.ach-item {
+    width: 100% !important; /* Force full width */
+    margin-bottom: 20px;
+    display: block;
+}
+
+/* 4. The Card Design (Horizontal Bar) */
+.ach-row {
+    width: 100%;
+    border: 1px solid #e9ecef;
+    border-radius: 16px; 
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background-color: #fff;
+    border-left: 6px solid transparent; 
+    display: flex; /* Horizontal Flex Layout */
+    align-items: center;
+    padding: 1rem 1.5rem; /* Spacious padding */
+    min-height: 110px; /* Consistent height */
+}
+
+.ach-row:hover {
+    transform: translateY(-3px) scale(1.01); /* Slight pop effect */
+    box-shadow: 0 8px 25px rgba(47, 125, 74, 0.1);
+    z-index: 2;
+}
+
+/* Earned State Styles */
+.ach-row-earned {
+    border-left-color: var(--green-main);
+    border-color: #d1e7dd;
+    background: linear-gradient(90deg, #ffffff 0%, #f8fff9 100%);
+}
+
+/* Locked State Styles */
+.ach-row-locked {
+    border-left-color: #adb5bd;
+    background-color: #f8f9fa;
+    opacity: 0.9;
+}
+.ach-row-locked .ach-icon-circle {
+    filter: grayscale(100%);
+    opacity: 0.6;
+}
+
+/* 5. Icon Circle (Left) */
+.ach-icon-circle {
+    width: 64px;
+    height: 64px;
+    min-width: 64px;
+    border-radius: 50%;
+    background-color: #fff;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 25px; /* Space between icon and text */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* 6. Text Content (Middle) */
+.ach-text-content {
+    flex-grow: 1; /* Takes up all available middle space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.ach-text-content h5 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.ach-text-content p {
+    font-size: 0.95rem;
+    color: #6c757d;
+    margin-bottom: 0;
+    max-width: 80%; /* Prevent text from hitting the XP number */
+}
+
+/* 7. EXP Display (Right) */
+.ach-xp-wrapper {
+    text-align: right;
+    min-width: 100px;
+    border-left: 1px solid #e9ecef;
+    padding-left: 20px;
+    margin-left: 20px;
+}
+
+.ach-xp-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: #adb5bd;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.ach-xp-value {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--green-main);
+}
+.ach-row-locked .ach-xp-value {
+    color: #adb5bd;
+}
+
+/* Mobile Responsiveness for Bars */
+@media (max-width: 768px) {
+    .ach-row {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.5rem;
+        height: auto;
+    }
+    .ach-icon-circle { margin-bottom: 15px; }
+    .ach-xp-wrapper {
+        border-left: none;
+        padding-left: 0;
+        margin-left: 0;
+        margin-top: 15px;
+        text-align: left;
+        width: 100%;
+        border-top: 1px solid #e9ecef;
+        padding-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.care-tips-btn {
+    background-color: var(--green-main);
+    color: #ffffff;
+    padding: 1.2rem 3.8rem;        /* clearly larger /
+    font-size: 1.2rem;             / bigger text /
+    font-weight: 700;              / very bold /
+    border-radius: 999px;
+    border: none;
+    box-shadow: 0 12px 30px rgba(47, 125, 74, 0.35);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;     / makes it pop */
+}
+
+.care-tips-btn:hover {
+    background-color: #25633b;
+    color: #ffffff;
+}
+
+.care-tips-arrow {
+    margin-left: 0.4rem;
+    font-size: 1.3rem;
+    transition: transform 0.15s ease-out;
+}
+
+.care-tips-btn:hover .care-tips-arrow {
+    transform: translateX(3px);
+}
+
+/* ---------- Floating Alert Button ---------- */
+.floating-alert-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 64px;
+    height: 64px;
+    background-color: #dc3545; /* Bootstrap Red */
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4);
+    z-index: 1050; /* Above most elements */
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-size: 1.8rem;
+}
+
+.floating-alert-btn:hover {
+    transform: scale(1.1);
+    color: #ffffff;
+    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.6);
+}
+
+/* Badge for unread alerts */
+.alert-count-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #ffc107; /* Warning Yellow */
+    color: #000;
+    border: 2px solid #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    min-width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Animation for critical alerts */
+.pulse-animation {
+    animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+    0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(220, 53, 69, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
+}
+.care-tips-btn {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
